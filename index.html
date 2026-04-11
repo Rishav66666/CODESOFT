@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tic-Tac-Toe AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <!-- Separate stylesheet -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="app">
+    <div class="title">TIC·TAC·TOE</div>
+    <div class="subtitle">Minimax · Alpha-Beta Pruning · Unbeatable AI</div>
+
+    <div class="mode-selector">
+      <button class="mode-btn active" id="btn-ai"    onclick="changeMode(0)">vs AI</button>
+      <button class="mode-btn"        id="btn-human" onclick="changeMode(1)">vs Human</button>
+    </div>
+
+    <div class="scoreboard">
+      <div class="score-box x-score">
+        <div class="score-label" id="label-x">You (X)</div>
+        <div class="score-value" id="score-x">0</div>
+      </div>
+      <div class="score-box">
+        <div class="score-label">Draws</div>
+        <div class="score-value" id="score-d">0</div>
+      </div>
+      <div class="score-box o-score">
+        <div class="score-label" id="label-o">AI (O)</div>
+        <div class="score-value" id="score-o">0</div>
+      </div>
+    </div>
+
+    <div class="turn-indicator">
+      <div class="turn-pip" id="pip-x"></div>
+      <div class="turn-label">X</div>
+      <div class="turn-divider"></div>
+      <div class="turn-label">O</div>
+      <div class="turn-pip" id="pip-o"></div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status playing" id="status">Your Turn</div>
+    </div>
+
+    <div class="board-wrapper">
+      <div class="board" id="board"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn primary" onclick="resetGame()">New Game</button>
+      <button class="btn"         onclick="resetAll()">Reset Scores</button>
+    </div>
+  </div>
+
+  <div class="algo-badge">
+    Minimax Algorithm<br>Alpha-Beta Pruning<br>Optimal every move
+  </div>
+
+  <!-- Separate JS file -->
+  <script src="game.js" defer></script>
+</body>
+</html>
