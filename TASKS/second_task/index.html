@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CAPTION — AI Image Analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<header>
+  <div class="logo">Caption <span>// AI Vision</span></div>
+  <div class="badge"><span class="dot"></span>claude-sonnet-4</div>
+</header>
+
+<div class="toast" id="toast"></div>
+
+<main>
+
+  <!-- INPUT IMAGE -->
+  <div>
+    <div class="section-label">Input Image</div>
+    <div class="upload-zone" id="uploadZone">
+
+      <div class="tab-bar">
+        <button class="tab active" onclick="switchTab('file')">📁 File</button>
+        <button class="tab" onclick="switchTab('url')">🔗 URL</button>
+        <button class="tab" onclick="switchTab('paste')">📋 Paste</button>
+      </div>
+
+      <!-- FILE Tab -->
+      <div class="tab-panel active" id="tab-file">
+        <div class="file-zone">
+          <input type="file" id="fileInput" accept="image/*"/>
+          <div class="fz-icon">🖼️</div>
+          <div class="fz-title">Tap to open file picker</div>
+          <div class="fz-sub">PNG · JPG · WEBP</div>
+        </div>
+      </div>
+
+      <!-- URL Tab -->
+      <div class="tab-panel" id="tab-url">
+        <div class="url-row">
+          <input class="url-input" id="urlInput" type="url"
+            placeholder="https://…/image.jpg" autocomplete="off" spellcheck="false"/>
+          <button class="url-btn" onclick="loadFromURL()">Load</button>
+        </div>
+        <div class="url-hint">
+          💡 Open any image in Chrome → long-press → "Copy image address", then paste here.
+        </div>
+      </div>
+
+      <!-- PASTE Tab -->
+      <div class="tab-panel" id="tab-paste">
+        <div class="paste-zone" id="pasteZone">
+          <div class="pz-icon">📋</div>
+          <div class="pz-title">Paste an image</div>
+          <div class="pz-sub">Copy an image from WhatsApp, Chrome,<br/>Gallery, etc. then tap the button below.</div>
+          <button class="paste-btn" onclick="triggerPaste()">📋 Tap to Paste Image</button>
+        </div>
+      </div>
+
+      <!-- Preview -->
+      <div class="preview-wrap" id="previewWrap">
+        <img class="preview-img" id="previewImg" src="" alt=""/>
+        <div class="preview-bar">
+          <div class="preview-info" id="previewInfo">Image ready</div>
+          <button class="preview-change" onclick="resetImage()">✕ Change</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ANALYSIS MODE -->
+  <div>
+    <div class="section-label">Analysis Mode</div>
+    <div class="mode-row">
+      <div class="mode-btn active" data-mode="caption">
+        <div class="mode-icon">✍️</div><span class="mode-name">Caption</span>
+      </div>
+      <div class="mode-btn" data-mode="detailed">
+        <div class="mode-icon">🔍</div><span class="mode-name">Detailed</span>
+      </div>
+      <div class="mode-btn" data-mode="tags">
+        <div class="mode-icon">🏷</div><span class="mode-name">Tags</span>
+      </div>
+      <div class="mode-btn" data-mode="story">
+        <div class="mode-icon">📖</div><span class="mode-name">Story</span>
+      </div>
+      <div class="mode-btn" data-mode="technical">
+        <div class="mode-icon">⚙️</div><span class="mode-name">Technical</span>
+      </div>
+      <div class="mode-btn" data-mode="emotion">
+        <div class="mode-icon">💭</div><span class="mode-name">Emotion</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANALYZE BUTTON -->
+  <button class="analyze-btn" id="analyzeBtn" disabled onclick="analyzeImage()">
+    <span id="btnIcon">▶</span>
+    <span id="btnLabel">Analyze Image</span>
+  </button>
+
+  <!-- RESULT -->
+  <div>
+    <div class="section-label">AI Output</div>
+    <div class="result-card">
+      <div class="result-header">
+        <span class="result-title">Generated Caption</span>
+        <div style="display:flex;gap:7px;align-items:center">
+          <span class="result-tag" id="modeTag">CAPTION</span>
+          <button class="copy-btn" id="copyBtn" style="display:none" onclick="copyResult()">⎘ Copy</button>
+        </div>
+      </div>
+      <div class="result-body" id="resultBody">
+        <div class="placeholder-state">
+          <div class="p-icon">👁</div>
+          <p>Load an image, pick a mode,<br/>then tap Analyze</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- META STATS -->
+  <div class="meta-strip" id="metaStrip" style="display:none">
+    <div class="meta-item">
+      <div class="meta-val" id="metaWords">—</div>
+      <div class="meta-key">Words</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-val" id="metaTime">—</div>
+      <div class="meta-key">Latency</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-val" id="metaConf">—</div>
+      <div class="meta-key">Mode</div>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div id="histLabel" class="section-label" style="display:none">Recent</div>
+  <div id="histList"></div>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

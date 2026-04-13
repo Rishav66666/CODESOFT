@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lumière — Recommendation Engine</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">Lumière</div>
+      <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="movies">Films</button>
+        <button class="tab-btn" data-tab="books">Books</button>
+        <button class="tab-btn" data-tab="products">Products</button>
+      </nav>
+      <div class="header-tag">AI Recommendations</div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-text">DISCOVER</div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Personalized for you</p>
+      <h1 class="hero-title">What will you<br/><em>love next?</em></h1>
+      <p class="hero-sub">Rate what you know. We'll find what you don't.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num" id="stat-rated">0</span><span class="stat-label">Rated</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num" id="stat-recs">0</span><span class="stat-label">Recommendations</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num" id="stat-match">—</span><span class="stat-label">Top Match %</span></div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-layout">
+
+    <!-- LEFT: Rate Items -->
+    <aside class="panel panel-rate">
+      <div class="panel-header">
+        <span class="panel-label">01</span>
+        <h2>Rate Items</h2>
+        <p>Score items you've seen, read, or used</p>
+      </div>
+      <div class="rate-list" id="rate-list"></div>
+    </aside>
+
+    <!-- RIGHT: Recommendations -->
+    <section class="panel panel-recs">
+      <div class="panel-header">
+        <span class="panel-label">02</span>
+        <h2>Your Picks</h2>
+        <p>Curated based on your taste profile</p>
+      </div>
+      <div class="recs-empty" id="recs-empty">
+        <div class="empty-icon">✦</div>
+        <p>Rate at least <strong>3 items</strong> to unlock recommendations</p>
+      </div>
+      <div class="recs-grid" id="recs-grid"></div>
+    </section>
+
+  </main>
+
+  <!-- TASTE PROFILE -->
+  <section class="taste-section" id="taste-section" style="display:none">
+    <div class="taste-inner">
+      <div class="taste-header">
+        <span class="panel-label">03</span>
+        <h2>Your Taste Profile</h2>
+        <p>How the algorithm sees you</p>
+      </div>
+      <div class="genre-bars" id="genre-bars"></div>
+    </div>
+  </section>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
